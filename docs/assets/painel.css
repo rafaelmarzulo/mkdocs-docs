@@ -1,0 +1,23 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+    border-radius: 0.75rem;
+}
+
+.card-header {
+    font-weight: bold;
+    background-color: #e9ecef;
+    border-bottom: 1px solid #dee2e6;
+}
+
+textarea.form-control {
+    font-family: monospace;
+    background-color: #fefefe;
+}
+
+.alert-success {
+    font-weight: bold;
+}

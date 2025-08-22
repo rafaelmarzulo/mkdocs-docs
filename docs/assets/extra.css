@@ -1,0 +1,109 @@
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f8fa;
+    margin: 0;
+    color: #222;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0 2rem 0;
+    padding: 0 2vw;
+}
+
+.doc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem 1rem 1.5rem 1rem;
+    box-shadow: 0 4px 28px 0 rgba(32, 118, 213, 0.08), 0 1.5px 5px 0 rgba(32, 118, 213, 0.05);
+    text-decoration: none;
+    transition: transform 0.12s, box-shadow 0.12s;
+    border: 1.5px solid #e8e8e8;
+    min-height: 270px;
+}
+.doc-card:hover {
+    transform: translateY(-8px) scale(1.025);
+    box-shadow: 0 12px 32px 0 rgba(32, 118, 213, 0.20), 0 3px 12px 0 rgba(32, 118, 213, 0.10);
+    border-color: #2076d5;
+}
+
+.doc-icon {
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.doc-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2076d5;
+    margin-bottom: 0.3rem;
+    text-align: center;
+}
+.doc-desc {
+    font-size: 1rem;
+    color: #444;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 700px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1vw;
+    }
+    .doc-card {
+        padding: 1.2rem 0.5rem;
+    }
+}
+.doc-card {
+    
+    text-decoration: none !important; /* Garante que não terá sublinhado */
+    outline: none;
+}
+.doc-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2076d5;
+    margin-bottom: 0.3rem;
+    text-align: center;
+    transition: color 0.18s;
+}
+.doc-card:hover .doc-title {
+    color: #1554a3; /* tom mais escuro no hover */
+}
+.doc-card:hover .doc-icon {
+    transform: scale(1.12) rotate(-3deg);
+    transition: transform 0.15s;
+}
+.doc-icon {
+    transition: transform 0.15s;
+}
+.doc-card a, .doc-card a:visited {
+    color: #2076d5;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.18s;
+}
+.doc-card a:hover {
+    color: #1554a3;
+    text-decoration: none;
+}
+.md-footer-meta__inner strong {
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+}
+.rodape-institucional {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #666;
+    text-align: center;
+    padding: 1rem;
+}

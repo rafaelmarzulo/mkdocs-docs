@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentação Interna DTI</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='favicon.ico') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='painel.css') }}">	
+</head>
+<body>
+<div class="container py-4">
+    <h1 class="mb-4 text-center">📝 Painel de Documentação</h1>
+
+    <!-- Upload de Imagem -->
+    <div class="card mb-4">
+        <div class="card-header">📷 Upload de Imagens</div>
+        <div class="card-body">
+            <form method="post" action="/upload" enctype="multipart/form-data" class="row g-3">
+                <div class="col-md-6">
+                    <label for="diretorio" class="form-label">Diretório</label>
+                    <select class="form-select" name="diretorio">
+                        {% for dir in diretorios %}
+                            <option value="{{ dir }}">{{ dir }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="file" class="form-label">Arquivo de imagem</label>
+                    <input class="form-control" type="file" name="file" required>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">📤 Enviar Imagem</button>
+                </div>
+            </form>
+            {% if mensagem %}
+                <div class="alert alert-success mt-3">{{ mensagem }}</div>
+            {% endif %}
+            {% if link_md %}
+                <div class="input-group mt-3">
+                    <input type="text" class="form-control" id="md_link" value="{{ link_md }}" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copiarMarkdown()">📋 Copiar Markdown</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Criar Novo Arquivo Markdown -->
+    <div class="card mb-4">
+    	<div class="card-header">📄 Criar Novo Arquivo</div>
+    	<div class="card-body">
+        <form method="post" action="/criar" class="row g-3">
+           <div class="col-md-6">
+    <label for="diretorio_md" class="form-label">Diretório de destino</label>
+    <select class="form-select" name="diretorio_md" id="diretorio_md" required>
+        {% for dir in diretorios %}
+            <option value="{{ dir }}">{{ dir }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="col-md-6">
+    <label for="novo_nome" class="form-label">Nome do novo arquivo (.md)</label>
+    <input type="text" class="form-control" id="novo_nome" name="novo_nome" required placeholder="ex: novo_arquivo.md">
+</div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-success w-100">
+                    <i class="bi bi-file-earmark-plus"></i> Criar Arquivo
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <!-- Editor de Arquivo Markdown -->
+    <div class="card">
+        <div class="card-header">📝 Editar Arquivo Markdown</div>
+        <div class="card-body">
+            <form method="get" action="/">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Selecionar arquivo:</label>
+                    <select name="nome" class="form-select" onchange="this.form.submit()">
+                        {% for arq in arquivos %}
+                            <option value="{{ arq }}" {% if arq == arquivo_atual %}selected{% endif %}>{{ arq }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+
+            <form method="post" action="/salvar">
+                <input type="hidden" name="nome" value="{{ arquivo_atual }}">
+                <div class="mb-3">
+                    <label for="conteudo" class="form-label">Conteúdo:</label>
+                    <textarea name="conteudo" class="form-control" rows="15">{{ conteudo }}</textarea>
+                </div>
+                <button class="btn btn-success" type="submit">💾 Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function copiarMarkdown() {
+    const input = document.getElementById("md_link");
+    input.select();
+    input.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+</script>
+</body>
+</html>

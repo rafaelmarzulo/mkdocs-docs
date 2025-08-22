@@ -1,0 +1,22 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# MkDocs
+site/
+*.swp
+*.log
+
+# VSCode
+.vscode/
+
+# Arquivos temporários e backups
+*~
+*.bak
+*.bkp
+.DS_Store
+.mkdocs.yml.swp
+get-pip.py

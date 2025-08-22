@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Novo Arquivo Markdown</title>
+    <link rel="stylesheet" href="/static/extra.css">
+</head>
+<body><a href="/"><button>⬅ Voltar ao painel</button></a>
+    <div class="container">
+        <h1>🆕 Criar novo arquivo Markdown</h1>
+
+        <form method="post" action="/criar">
+            <label>Nome do arquivo (.md):</label>
+            <input type="text" name="nome" placeholder="ex: novo_arquivo.md" required>
+
+            <label>Salvar em:</label>
+            <select name="destino">
+                {% for d in subdirs %}
+                    <option value="{{ d }}">{{ d or 'raiz (/docs)' }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Conteúdo inicial:</label>
+            <textarea name="conteudo"># Novo conteúdo</textarea>
+
+            <button type="submit">✅ Criar</button>
+        </form>
+
+        <br>
+        <a href="/" class="button">⬅ Voltar ao painel</a>
+    </div>
+</body>
+</html>
+

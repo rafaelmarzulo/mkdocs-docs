@@ -1,0 +1,50 @@
+import os
+
+INTRO = """# 📄 Guia de Documentação Interna
+
+Bem-vindo ao sistema de documentação interna da empresa. Este guia oferece instruções, boas práticas e informações essenciais para o uso, manutenção e atualização dos documentos técnicos e operacionais utilizados pela organização.
+
+Nosso objetivo é garantir que todos os colaboradores tenham acesso fácil, claro e organizado às informações necessárias para suas atividades diárias, assegurando a padronização e a qualidade dos processos internos.
+
+---
+"""
+
+SVG_DOC = """
+<svg width="32" height="32" viewBox="0 0 20 20" fill="#1976d2" style="vertical-align:middle;"><path d="M4 2h9l5 5v11a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z"/><path d="M13 2v6h6"/></svg>
+"""
+
+def gerar_index_md(diretorio, incluir_intro=False):
+    arquivos = [
+        f for f in os.listdir(diretorio)
+        if f.endswith('.md')
+        and not f.startswith('index')
+        and '_old' not in f
+        and '.bkp' not in f
+    ]
+    print(f"[DEBUG] Analisando {diretorio}, arquivos encontrados: {arquivos}")
+    if not arquivos:
+        print("[DEBUG] Nenhum arquivo válido encontrado.")
+        return
+    cards = []
+    for arq in arquivos:
+        nome = arq.replace('.md', '').replace('_', ' ').title()
+        # O link deve ser SEM o .md no Material, mas se não funcionar, tente {arq}
+        link = arq.replace('.md', '')
+        cards.append(f"""
+<a class="doc-card" href="{link}">
+  <div class="doc-icon">{SVG_DOC}</div>
+  <div class="doc-title">{nome}</div>
+</a>
+""")
+    cards_html = '<div class="cards-container">\n' + "\n".join(cards) + '\n</div>'
+    output_path = os.path.join(diretorio, "index.md")
+    with open(output_path, "w", encoding="utf-8") as f:
+        if incluir_intro:
+            f.write(INTRO)
+        f.write(cards_html)
+    print(f"[DEBUG] Gerado: {output_path}")
+
+if __name__ == "__main__":
+    print("Diretório atual:", os.getcwd())
+    print("Conteúdo docs/documentacao:", os.listdir("docs/documentacao"))
+    gerar_index_md("docs/documentacao", incluir_intro=True)
