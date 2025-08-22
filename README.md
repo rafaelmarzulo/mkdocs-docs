@@ -108,15 +108,15 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 ### Página Inicial (MkDocs)
 
-![Página Inicial](assets/Pagina_inicial.png)
+![Página Inicial](docs/assets/imagens/Pagina_inicial.png)
 
 ### Painel de Gerenciamento
 
-![Painel Web](assets/Painel-Web.png)
+![Painel Web](docs/assets/imagens/Painel-Web.png)
 
 ---
 
 ## 🙋‍♂️ Autor
 
 Rafael Marzulo  
-🔗 [GitHub](https://github.com/rafaelmarzulo) • 💼 [LinkedIn](https://www.linkedin.com/in/rafaelmarzulo)
+🔗 [GitHub](https://github.com/rafaelmarzulo) • 💼 [LinkedIn](https://www.linkedin.com/in/rafael-marzulo-58b04b31/)
