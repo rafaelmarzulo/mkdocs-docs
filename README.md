@@ -1,102 +1,122 @@
-# 📚 Plataforma MkDocs com Painel Web para Gestão de Documentação Técnica
+# 📚 Projeto MkDocs com Painel Web Integrado
 
-![GitHub last commit](https://img.shields.io/github/last-commit/SEU_USUARIO/SEU_REPO?style=flat-square)
-![Python](https://img.shields.io/badge/python-3.12-blue?style=flat-square)
-![License](https://img.shields.io/github/license/SEU_USUARIO/SEU_REPO?style=flat-square)
-
-Documentação técnica e operacional dos sistemas da Diretoria de Tecnologia da Informação.
-
----
-
-## 🧩 Visão Geral
-
-Este projeto utiliza o MkDocs com tema `Material` para gerar sites estáticos com documentação técnica. Adicionalmente, um painel web baseado em **FastAPI** foi integrado para permitir a edição e organização dos conteúdos `.md` diretamente pela interface web.
+Este projeto oferece uma solução de documentação técnica com visual moderno utilizando [MkDocs](https://www.mkdocs.org/) e um **painel web de gerenciamento**, ideal para times de TI e DevOps.
 
 ---
 
 ## ✨ Funcionalidades
 
-- Criação e edição de arquivos Markdown via painel
-- Execução automática do `mkdocs build` após cada modificação
-- Separação por seções: Visão Geral, Instalação, APIs, Documentação Final
-- Organização por usuário final e área técnica
-- Script de geração automatizada de índice de arquivos
-- Configuração com systemd (`mkdocs-panel.service`, `mkdocs-editor.service`, etc.)
+- 📄 **Documentação com MkDocs**: Interface moderna, organizada por tópicos como Instalação, APIs, e Usuário Final.
+- 🧠 **Geração automática de índice (`index.md`)** com Python.
+- 🖼️ **Painel Web**: Upload de imagens e criação de arquivos `.md` diretamente pela interface web.
+- ⚙️ **Scripts Shell**: Automação da instalação e build da solução.
+- 🚀 **Deploy facilitado** com `build.sh` e estrutura modular.
 
 ---
 
-## 🖼️ Interface
-
-### Página Inicial
-
-![Página Inicial](https://user-images.githubusercontent.com/SEU_USUARIO/000000/pagina-inicial.png)
-
-### Painel Web
-
-![Painel Editor](https://user-images.githubusercontent.com/SEU_USUARIO/000000/painel-editor.png)
-
-> ⚠️ As imagens acima são ilustrativas. Substitua com capturas reais em produção.
-
----
-
-## 🏗️ Instalação Local
+## 📂 Estrutura do Projeto
 
 ```bash
-git clone https://github.com/SEU_USUARIO/seu-repo.git
-cd seu-repo
-python3.12 -m venv venv
-source venv/bin/activate
+mkdocs/
+├── docs/                  # Arquivos .md organizados em tópicos
+├── painel/                # Painel Web em FastAPI
+├── overrides/             # Customizações de tema
+├── scripts/               # Scripts de build e automação
+├── site/                  # Saída do build MkDocs (ignorada pelo Git)
+├── mkdocs.yml             # Configuração do MkDocs
+├── requirements.txt       # Dependências Python
+├── VERSION                # Versão atual da aplicação
+├── README.md              # Este arquivo
+```
+
+---
+
+## 🖥️ Painel de Documentação Web
+
+O painel em FastAPI permite:
+
+- Upload de imagens (.png, .jpg...) para serem usadas nos `.md`
+- Criação de arquivos `.md` em diretórios existentes
+- Interface amigável para manter a documentação sem acessar o servidor
+
+🔒 Recomendado uso com autenticação via proxy reverso (ex: Nginx + Basic Auth).
+
+---
+
+## 🧪 Pré-requisitos
+
+- Python 3.10+
+- MkDocs + Material Theme
+- FastAPI e Uvicorn
+
+Instale as dependências:
+
+```bash
 pip install -r requirements.txt
-uvicorn painel.main:app --reload
-```
-
-Acesse `http://localhost:8000/painel` para abrir o painel.
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-.
-├── docs/
-│   ├── visao-geral/
-│   ├── instalacao/
-│   ├── usuario-final/
-│   ├── documentacao/
-├── painel/
-│   ├── main.py
-│   ├── forms, views, routes...
-├── scripts/
-│   ├── build.sh
-├── mkdocs.yml
-└── requirements.txt
 ```
 
 ---
 
-## ⚙️ Serviços no Systemd
+## ⚙️ Scripts Importantes
 
-- `mkdocs-panel.service`: Inicia o painel FastAPI
-- `mkdocs-editor.service`: Editor/preview em background
-- `mkdocs-build.timer`: Recompila a documentação automaticamente
-- `fix-mkdocs-perms.service`: Corrige permissões após build
-
----
-
-## 📌 Observações
-
-- Projeto inicialmente desenvolvido para uma instituição de ensino.
-- Dados sensíveis e nomes institucionais foram removidos para publicação pública.
+| Script | Descrição |
+|--------|-----------|
+| `scripts/build.sh` | Gera a documentação com `mkdocs build` |
+| `scripts/gerador-indexes.py` | Gera o arquivo `index.md` com os cards automaticamente |
+| `scripts/instalar_automacao.sh` | Instala o painel e dependências |
+| `scripts/instalar_solucao_completa.sh` | Instala toda a solução MkDocs + Painel |
 
 ---
 
-## 🤝 Contribuições
+## 🧾 Versão
 
-Sinta-se livre para abrir *Issues* e enviar *Pull Requests*. Toda contribuição é bem-vinda!
+```bash
+cat VERSION
+v1.0.0
+```
 
 ---
 
-## 📝 Licença
+## 🖼️ Como adicionar imagens
 
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+- Copie as imagens para o diretório `docs/assets/`.
+- Referencie no `.md` assim:
 
+```markdown
+![Descrição](assets/nome-da-imagem.png)
+```
+
+---
+
+## ✅ Checklist de Melhorias Implementadas
+
+- [x] Remoção de menções institucionais
+- [x] Licença `MIT` adicionada
+- [x] Script `build.sh` e `.gitignore` validados
+- [x] Arquivo `VERSION` criado
+- [x] Estrutura modular do projeto organizada
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+
+---
+
+## 📸 Capturas de Tela
+
+### Página Inicial (MkDocs)
+
+![Página Inicial](assets/Pagina_inicial.png)
+
+### Painel de Gerenciamento
+
+![Painel Web](assets/Painel-Web.png)
+
+---
+
+## 🙋‍♂️ Autor
+
+Rafael Marzulo  
+🔗 [GitHub](https://github.com/rafaelmarzulo) • 💼 [LinkedIn](https://www.linkedin.com/in/rafaelmarzulo)
